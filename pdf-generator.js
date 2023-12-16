@@ -5,14 +5,15 @@ let browser;
 
 async function getBrowserInstance() {
   if (!browser) {
-    browser = await puppeteer.launch({
+    const options = {
       args: [
         "--disable-extensions",
         "--disable-dev-shm-usage",
         "--no-sandbox",
         "--disable-setuid-sandbox",
       ],
-    });
+    };
+    browser = await puppeteer.launch(options);
   }
   return browser;
 }

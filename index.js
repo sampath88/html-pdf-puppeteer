@@ -1,10 +1,18 @@
 const express = require("express");
 const fs = require("fs").promises;
+const path = require("path");
+
 const generatePDFFromHTML = require("./pdf-generator");
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Define the directory where your images and other static files are located
+const publicDirectoryPath = path.join(__dirname, "/public");
+
+// Setup static directory to serve
+app.use(express.static(publicDirectoryPath));
 
 app.get("/generate-pdf", async (req, res) => {
   try {
